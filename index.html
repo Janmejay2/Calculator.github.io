@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(0, 0, 0);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #display {
+            height: 60px;
+            color: black;
+            width: 340px;
+            border-radius: 20px;
+            font-size: 30px;
+            font-style: bold;
+            background-color: whitesmoke;
+        }
+
+        .calculator {
+            margin-top: 100px;
+            background-image: linear-gradient(135deg, #e8e6e6 0%, #adabab 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            font-size: 20px;
+            border: none;
+            transition: all 0.3s ease-in-out;
+            padding: 10px 20px;
+            border-radius: 60px;
+            background-image: linear-gradient(135deg, #355a67 0%, #1c1e1c 100%);
+            box-shadow: 2px 5px 5px #355a67;
+            outline: none;
+            cursor: pointer;
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .number:hover {
+            transform: translateY(3px);
+            box-shadow: none;
+        }
+
+        .number:active {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button id="clear">CLR</button>
+            <button id="backspace">DEL</button>
+            <button class="operator" id="modulus">%</button>
+            <button class="operator" id="divide">/</button>
+            <button class="operator" id="add">+</button>
+            <button class="operator" id="substract">-</button>
+            <button class="operator" id="multiply">*</button>
+            <button class="operator" id="dot">.</button>
+            <button class="operator" id="exponential">**</button>
+            <button id="equals">=</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="number">10</button>
+        </div>
+    </div>
+    <script>
+        const display = document.getElementById("display");
+        const buttons = document.querySelectorAll(".number, .operator, #clear, #equals, #backspace");
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                if (button.id === "clear") {
+                    display.value = "";
+                }
+                else if (button.id === "equals") {
+                    try {
+                        display.value = eval(display.value);
+                    }
+                    catch (error) {
+                        display.value = "Error";
+                    }
+                } else if (button.id === "backspace") {
+                    display.value = display.value.slice(0, -1);
+
+                }
+                else {
+                    display.value += button.textContent;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
